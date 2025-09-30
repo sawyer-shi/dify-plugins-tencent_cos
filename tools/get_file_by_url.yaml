@@ -4,7 +4,6 @@ identity:
   label:
     en_US: "Get File by COS URL"
     zh_Hans: "通过COS URL获取文件"
-    pt_BR: "Obter Arquivo por URL COS"
   tags:
     - utilities
     - productivity
@@ -13,7 +12,6 @@ description:
   human:
     en_US: "Retrieve the content of a file from Tencent Cloud COS using its URL"
     zh_Hans: "通过URL获取腾讯云COS中的文件内容"
-    pt_BR: "Recupere o conteúdo de um arquivo do Tencent Cloud COS usando sua URL"
   llm: "Retrieve the content of a file from Tencent Cloud COS using its URL"
 parameters:
   - name: file_url
@@ -22,11 +20,9 @@ parameters:
     label:
       en_US: COS File URL
       zh_Hans: COS文件URL
-      pt_BR: URL do Arquivo COS
     human_description:
       en_US: "The URL of the file in Tencent Cloud COS"
       zh_Hans: "腾讯云COS中文件的URL"
-      pt_BR: "A URL do arquivo no Tencent Cloud COS"
     llm_description: "The URL of the file in Tencent Cloud COS"
     form: llm
 extra:

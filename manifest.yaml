@@ -3,15 +3,11 @@ type: plugin
 author: sawyer-shi
 name: tencent_cos
 label:
-  en_US: tencent_cos
-  ja_JP: tencent_cos
-  zh_Hans: tencent_cos
-  pt_BR: tencent_cos
+  en_US: "Tencent Cloud COS"
+  zh_Hans: "腾讯云COS对象存储"
 description:
   en_US: Upload files to Tencent  Cloud COS and return the file URL; Enter the URL of the Tencent  Cloud COS file to return the file itself
-  ja_JP: Upload files to Tencent  Cloud COS and return the file URL; Enter the URL of the Tencent  Cloud COS file to return the file itself
-  zh_Hans: Upload files to Tencent  Cloud COS and return the file URL; Enter the URL of the Tencent  Cloud COS file to return the file itself
-  pt_BR: Upload files to Tencent  Cloud COS and return the file URL; Enter the URL of the Tencent  Cloud COS file to return the file itself
+  zh_Hans: "用于与腾讯云COS交互，支持文件上传和文件获取"
 icon: icon.png
 resource:
   memory: 268435456
@@ -19,18 +15,10 @@ resource:
     model:
       enabled: true
       llm: true
-      text_embedding: false
-      rerank: false
-      tts: false
-      speech2text: false
-      moderation: false
     endpoint:
       enabled: true
     app:
       enabled: true
-    storage:
-      enabled: true
-      size: 1048576
 plugins:
   tools:
     - provider/tencent_cos.yaml

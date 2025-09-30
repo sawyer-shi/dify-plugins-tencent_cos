@@ -1,16 +1,21 @@
 identity:
-  name: multi_upload_files
+  name: "multi_upload_files"
   author: Tencent Cloud
   label:
     en_US: Multi Upload Files
-    zh_Hans: 批量上传文件
-  description:
-    en_US: Upload multiple files to Tencent Cloud Object Storage (COS)
-    zh_Hans: 批量上传多个文件到腾讯云对象存储(COS)
+    zh_Hans: 批量上传文件返回URL列表
+  tags:
+    - utilities
+    - productivity
   icon: icon.png
+description:
+  human:
+    en_US: Upload multiple files to Tencent Cloud Object Storage (COS)
+    zh_Hans: 批量上传多个文件到腾讯云对象存储(COS)返回URL列表
+  llm: Upload multiple files to Tencent Cloud Object Storage (COS)
 parameters:
   - name: files
-    type: array
+    type: files
     required: true
     label:
       en_US: Files
@@ -18,6 +23,7 @@ parameters:
     human_description:
       en_US: Select multiple files to upload to Tencent Cloud COS
       zh_Hans: 选择要上传到腾讯云COS的多个文件
+    llm_description: Select multiple files to upload to Tencent Cloud COS
     form: llm
     min_items: 1
     max_items: 10
@@ -30,6 +36,7 @@ parameters:
     human_description:
       en_US: The target directory in the bucket where files will be stored
       zh_Hans: 存储文件的存储桶中的目标目录
+    llm_description: The target directory in the bucket where files will be stored
     form: llm
   - name: filename_mode
     type: select
@@ -40,7 +47,8 @@ parameters:
     human_description:
       en_US: Choose how to generate filenames for uploaded files
       zh_Hans: 选择如何为上传的文件生成文件名
-    form: form
+    llm_description: Choose how to generate filenames for uploaded files
+    form: llm
     options:
       - value: filename
         label:
@@ -60,7 +68,8 @@ parameters:
     human_description:
       en_US: Choose how to organize the directory structure
       zh_Hans: 选择如何组织目录结构
-    form: form
+    llm_description: Choose how to organize the directory structure
+    form: llm
     options:
       - value: no_subdirectory
         label:
@@ -75,5 +84,6 @@ parameters:
           en_US: YearMonthDay combined
           zh_Hans: 年月日 一体目录
     default: no_subdirectory
-python:
-  source: tools/multi_upload_files.py
+extra:
+  python:
+    source: tools/multi_upload_files.py
