@@ -1,4 +1,4 @@
-# Tencent Cloud COS Plugin / 腾讯云COS插件
+# Tencent Cloud COS Plugin / 腾讯云COS对象存储插件
 
 [English](#english) | [中文](#中文)
 
@@ -114,11 +114,16 @@ Dedicated tool for retrieving files from Tencent Cloud COS using URLs.
 ### Examples
 
 #### Upload File
+<img width="2026" height="523" alt="upload-001" src="https://github.com/user-attachments/assets/ac7a1539-e7fc-419d-a9b0-273cec761a7d" />
 
+#### Batch Upload Files
 
-
+<img width="1978" height="954" alt="upload-002" src="https://github.com/user-attachments/assets/ab5755e1-c6df-4b63-8525-a52b1ef1df84" />
 
 #### Get File by URL
+
+<img width="2225" height="487" alt="download-001" src="https://github.com/user-attachments/assets/c4aab17f-5294-4107-8799-f85c3ef1f7cd" />
+<img width="2222" height="544" alt="download-002" src="https://github.com/user-attachments/assets/12fbc8ec-4249-46b4-8680-e10761510774" />
 
 
 
@@ -248,13 +253,17 @@ Dedicated tool for retrieving files from Tencent Cloud COS using URLs.
 
 ### 示例
 
-#### 上传文件 
+#### 上传文件
+<img width="2026" height="523" alt="upload-001" src="https://github.com/user-attachments/assets/ac7a1539-e7fc-419d-a9b0-273cec761a7d" />
 
+#### 批量上传文件
 
+<img width="1978" height="954" alt="upload-002" src="https://github.com/user-attachments/assets/ab5755e1-c6df-4b63-8525-a52b1ef1df84" />
 
+#### 获取(下载)文件
 
-
-#### 通过URL获取文件
+<img width="2225" height="487" alt="download-001" src="https://github.com/user-attachments/assets/c4aab17f-5294-4107-8799-f85c3ef1f7cd" />
+<img width="2222" height="544" alt="download-002" src="https://github.com/user-attachments/assets/12fbc8ec-4249-46b4-8680-e10761510774" />
 
 
 
