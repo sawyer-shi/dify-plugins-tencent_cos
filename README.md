@@ -140,6 +140,7 @@ Dedicated tool for retrieving files from Tencent Cloud COS using URLs.
 - **Author**: `https://github.com/sawyer-shi`
 - **Email**: sawyer36@foxmail.com
 - **License**: MIT License
+- **Source Code**: `https://github.com/sawyer-shi/dify-plugins-tencent_cos`
 - **Support**: Through Dify platform and GitHub Issues
 
 ---
