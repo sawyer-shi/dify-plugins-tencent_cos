@@ -195,22 +195,74 @@ class MultiUploadFilesTool(Tool):
                         if isinstance(file, File):
                             # 获取文件内容
                             file_content = file.blob
+                            # 获取文件内容类型
+                            content_type = getattr(file, 'content_type', None)
+                            if not content_type:
+                                # 尝试从文件类型推断content_type
+                                file_type = get_file_type(file)
+                                if file_type == 'png':
+                                    content_type = 'image/png'
+                                elif file_type == 'jpg' or file_type == 'jpeg':
+                                    content_type = 'image/jpeg'
+                                elif file_type == 'gif':
+                                    content_type = 'image/gif'
+                                elif file_type == 'pdf':
+                                    content_type = 'application/pdf'
+                                elif file_type == 'doc':
+                                    content_type = 'application/msword'
+                                elif file_type == 'docx':
+                                    content_type = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                                elif file_type == 'xls':
+                                    content_type = 'application/vnd.ms-excel'
+                                elif file_type == 'xlsx':
+                                    content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                                elif file_type == 'txt':
+                                    content_type = 'text/plain'
+                                else:
+                                    content_type = 'application/octet-stream'
                             # 上传文件内容
                             response = client.put_object(
                                 Bucket=credentials['bucket'],
                                 Body=file_content,
-                                Key=object_key
+                                Key=object_key,
+                                ContentType=content_type
                             )
                         # 尝试作为普通文件对象处理
                         elif hasattr(file, 'read'):
                             # 重置文件指针到开头
                             if hasattr(file, 'seek'):
                                 file.seek(0)
+                            # 获取文件内容类型
+                            content_type = getattr(file, 'content_type', None)
+                            if not content_type:
+                                # 尝试从文件类型推断content_type
+                                file_type = get_file_type(file)
+                                if file_type == 'png':
+                                    content_type = 'image/png'
+                                elif file_type == 'jpg' or file_type == 'jpeg':
+                                    content_type = 'image/jpeg'
+                                elif file_type == 'gif':
+                                    content_type = 'image/gif'
+                                elif file_type == 'pdf':
+                                    content_type = 'application/pdf'
+                                elif file_type == 'doc':
+                                    content_type = 'application/msword'
+                                elif file_type == 'docx':
+                                    content_type = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                                elif file_type == 'xls':
+                                    content_type = 'application/vnd.ms-excel'
+                                elif file_type == 'xlsx':
+                                    content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                                elif file_type == 'txt':
+                                    content_type = 'text/plain'
+                                else:
+                                    content_type = 'application/octet-stream'
                             # 上传文件流
                             response = client.put_object(
                                 Bucket=credentials['bucket'],
                                 Body=file,
-                                Key=object_key
+                                Key=object_key,
+                                ContentType=content_type
                             )
                         # 尝试作为文件路径处理
                         elif isinstance(file, (str, bytes, os.PathLike)) and os.path.exists(file):

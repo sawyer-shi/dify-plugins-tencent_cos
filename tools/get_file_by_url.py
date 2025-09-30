@@ -8,6 +8,7 @@ from qcloud_cos import CosConfig, CosS3Client
 from qcloud_cos.cos_exception import CosServiceError
 
 from dify_plugin.interfaces.tool import Tool, ToolProvider
+from .utils import get_extension_from_content_type
 
 
 class GetFileByUrlTool(Tool):
@@ -31,6 +32,10 @@ class GetFileByUrlTool(Tool):
                     extension = '.gif'
                 else:
                     extension = ''
+                
+                # 如果推断出了扩展名，添加到文件名中
+                if extension:
+                    result['filename'] = result['filename'] + extension
             
             # 构建文件元数据，确保包含支持图片显示的所有必要属性
             file_metadata = {
