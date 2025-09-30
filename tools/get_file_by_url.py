@@ -24,30 +24,31 @@ class GetFileByUrlTool(Tool):
             _, extension = os.path.splitext(result['filename'])
             if not extension:
                 # 如果没有扩展名，根据content_type尝试推断
-                if result['content_type'] == 'image/png':
-                    extension = '.png'
-                elif result['content_type'] == 'image/jpeg':
-                    extension = '.jpg'
-                elif result['content_type'] == 'image/gif':
-                    extension = '.gif'
-                else:
-                    extension = ''
+                extension = get_extension_from_content_type(result['content_type'])
                 
                 # 如果推断出了扩展名，添加到文件名中
                 if extension:
                     result['filename'] = result['filename'] + extension
             
+            # 规范化 content_type：若为 application/octet-stream，则根据文件名推断
+            content_type = result['content_type'] or 'application/octet-stream'
+            if content_type in ('application/octet-stream', 'binary/octet-stream'):
+                import mimetypes
+                guessed, _ = mimetypes.guess_type(result['filename'])
+                if guessed:
+                    content_type = guessed
+            
             # 构建文件元数据，确保包含支持图片显示的所有必要属性
             file_metadata = {
                 'filename': result['filename'],
-                'content_type': result['content_type'],
+                'content_type': content_type,
                 'size': result['file_size'],
-                'mime_type': result['content_type'],
+                'mime_type': content_type,
                 'extension': extension
             }
             
             # 如果是图片类型，添加特定标志以确保在Dify页面正常显示
-            if result['content_type'].startswith('image/'):
+            if content_type.startswith('image/'):
                 file_metadata['is_image'] = True
                 file_metadata['display_as_image'] = True
                 file_metadata['type'] = 'image'
@@ -60,7 +61,7 @@ class GetFileByUrlTool(Tool):
             
             # 在text中输出成功消息、文件大小和类型，文件大小以MB为单位 - 英文消息
             file_size_mb = result['file_size'] / (1024 * 1024) if result['file_size'] > 0 else 0
-            success_message = f"File downloaded successfully: {result['filename']}\nFile size: {file_size_mb:.2f} MB\nFile type: {result['content_type']}"
+            success_message = f"File downloaded successfully: {result['filename']}\nFile size: {file_size_mb:.2f} MB\nFile type: {content_type}"
             yield self.create_text_message(success_message)
         except Exception as e:
             # 失败时在text中输出错误信息 - 英文消息
@@ -125,7 +126,7 @@ class GetFileByUrlTool(Tool):
             file_size = len(file_content)
             
             # 获取文件类型
-            content_type = response.get('ContentType', 'application/octet-stream')
+            content_type = response['ContentType'] if 'ContentType' in response else 'application/octet-stream'
             
             # 获取文件名
             filename = os.path.basename(object_key)

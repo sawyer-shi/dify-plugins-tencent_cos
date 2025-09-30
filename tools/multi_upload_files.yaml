@@ -21,8 +21,8 @@ parameters:
       en_US: Files
       zh_Hans: 文件
     human_description:
-      en_US: Select multiple files to upload to Tencent Cloud COS
-      zh_Hans: 选择要上传到腾讯云COS的多个文件
+      en_US: File array to upload (up to 10 files)
+      zh_Hans: 要上传的文件数组（最多10个文件）
     llm_description: Select multiple files to upload to Tencent Cloud COS
     form: llm
     min_items: 1
