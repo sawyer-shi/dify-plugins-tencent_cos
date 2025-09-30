@@ -1,0 +1,50 @@
+version: 0.0.1
+type: plugin
+author: sawyer-shi
+name: tencent_cos
+label:
+  en_US: tencent_cos
+  ja_JP: tencent_cos
+  zh_Hans: tencent_cos
+  pt_BR: tencent_cos
+description:
+  en_US: Upload files to Tencent  Cloud COS and return the file URL; Enter the URL of the Tencent  Cloud COS file to return the file itself
+  ja_JP: Upload files to Tencent  Cloud COS and return the file URL; Enter the URL of the Tencent  Cloud COS file to return the file itself
+  zh_Hans: Upload files to Tencent  Cloud COS and return the file URL; Enter the URL of the Tencent  Cloud COS file to return the file itself
+  pt_BR: Upload files to Tencent  Cloud COS and return the file URL; Enter the URL of the Tencent  Cloud COS file to return the file itself
+icon: icon.png
+resource:
+  memory: 268435456
+  permission:
+    model:
+      enabled: true
+      llm: true
+      text_embedding: false
+      rerank: false
+      tts: false
+      speech2text: false
+      moderation: false
+    endpoint:
+      enabled: true
+    app:
+      enabled: true
+    storage:
+      enabled: true
+      size: 1048576
+plugins:
+  tools:
+    - provider/tencent_cos.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+  minimum_dify_version: null
+created_at: 2025-09-30T13:53:14.2358802+08:00
+privacy: PRIVACY.md
+repo: https://github.com/sawyer-shi/dify-plugins-tencent_cos
+verified: false

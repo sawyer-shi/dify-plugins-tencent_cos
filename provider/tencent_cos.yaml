@@ -1,0 +1,83 @@
+identity:
+  author: "sawyer-shi"
+  name: "tencent_cos"
+  label:
+    en_US: "Tencent Cloud COS"
+    zh_Hans: "腾讯云COS对象存储"
+    pt_BR: "Tencent Cloud COS"
+  description:
+    en_US: "For interacting with Tencent Cloud COS, supporting file upload and file retrieval"
+    zh_Hans: "用于与腾讯云COS交互，支持文件上传和文件获取"
+    pt_BR: "Para interagir com o Tencent Cloud COS, suportando upload e recuperação de arquivos"
+  icon: "icon.png"
+
+tools:
+  - tools/upload_file.yaml
+  - tools/get_file_by_url.yaml
+  - tools/multi_upload_files.yaml
+
+credentials_for_provider:
+  secret_id:
+    label:
+      en_US: "SecretId"
+      zh_Hans: "SecretId"
+      pt_BR: "SecretId"
+    help:
+      en_US: "Your Tencent Cloud SecretId"
+      zh_Hans: "您的腾讯云SecretId"
+      pt_BR: "Seu SecretId do Tencent Cloud"
+    placeholder:
+      en_US: "Your SecretId"
+      zh_Hans: "您的 SecretId"
+      pt_BR: "Seu SecretId"
+    required: true
+    type: "text-input"
+  secret_key:
+    label:
+      en_US: "SecretKey"
+      zh_Hans: "SecretKey"
+      pt_BR: "SecretKey"
+    help:
+      en_US: "Your Tencent Cloud SecretKey"
+      zh_Hans: "您的腾讯云SecretKey"
+      pt_BR: "Seu SecretKey do Tencent Cloud"
+    placeholder:
+      en_US: "Your SecretKey"
+      zh_Hans: "您的 SecretKey"
+      pt_BR: "Seu SecretKey"
+    required: true
+    type: "secret-input"
+  region:
+    label:
+      en_US: "Region"
+      zh_Hans: "地域"
+      pt_BR: "Region"
+    help:
+      en_US: "The region of your Tencent Cloud COS service"
+      zh_Hans: "腾讯云COS服务的地域"
+      pt_BR: "A região do seu serviço Tencent Cloud COS"
+    placeholder:
+      en_US: "e.g. ap-beijing"
+      zh_Hans: "例如：ap-beijing"
+      pt_BR: "ex: ap-beijing"
+    required: true
+    type: "text-input"
+  bucket:
+    label:
+      en_US: "Bucket Name"
+      zh_Hans: "存储桶名称"
+      pt_BR: "Nome do Bucket"
+    help:
+      en_US: "The name of your Tencent Cloud COS bucket"
+      zh_Hans: "腾讯云COS存储桶的名称"
+      pt_BR: "O nome do seu bucket do Tencent Cloud COS"
+    placeholder:
+      en_US: "your-bucket"
+      zh_Hans: "your-bucket"
+      pt_BR: "seu-bucket"
+    required: true
+    type: "text-input"
+
+extra:
+  python:
+    source: provider/tencent_cos.py
