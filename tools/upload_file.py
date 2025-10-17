@@ -28,7 +28,55 @@ class UploadFileTool(Tool):
             # 执行文件上传操作
             result = self._upload_file(tool_parameters, credentials)
             
-            yield self.create_json_message(result)
+            # 获取文件信息
+            file = tool_parameters.get('file')
+            file_size = 0
+            file_type = 'unknown'
+            
+            # 尝试获取文件大小
+            if isinstance(file, File) and hasattr(file, 'blob'):
+                file_size = len(file.blob)
+            elif hasattr(file, 'read'):
+                # 保存当前文件指针位置
+                if hasattr(file, 'tell'):
+                    current_pos = file.tell()
+                else:
+                    current_pos = None
+                
+                # 读取文件内容获取大小
+                content = file.read()
+                file_size = len(content)
+                
+                # 重置文件指针
+                if hasattr(file, 'seek') and current_pos is not None:
+                    file.seek(current_pos)
+            elif isinstance(file, (str, bytes, os.PathLike)) and os.path.exists(file):
+                file_size = os.path.getsize(file)
+                
+            # 尝试获取文件类型
+            file_type = get_file_type(file)
+            
+            # 转换文件大小为MB
+            file_size_mb = file_size / (1024 * 1024) if file_size > 0 else 0
+            
+            # 构建与批量上传一致的JSON响应结构
+            files_info = [{
+                "filename": result.get('filename', 'unknown'),
+                "file_size_bytes": file_size,
+                "file_size_mb": round(file_size_mb, 2),
+                "file_type": file_type,
+                "file_url": result['file_url'],
+                "status": "success"
+            }]
+            
+            json_response = {
+                "status": "completed",
+                "success_count": 1,
+                "error_count": 0,
+                "files": files_info
+            }
+            
+            yield self.create_json_message(json_response)
             
             # 在text中输出成功信息，包含文件类型、大小（M单位）和访问链接
             file = tool_parameters.get('file')
@@ -72,6 +120,65 @@ class UploadFileTool(Tool):
             success_message += f"Object key: {result['object_key']}"
             yield self.create_text_message(success_message)
         except Exception as e:
+            # 构建错误响应
+            error_message = str(e)
+            
+            # 尝试获取文件信息，即使上传失败
+            file = tool_parameters.get('file')
+            file_size = 0
+            file_type = 'unknown'
+            filename = "unknown"
+            
+            # 尝试获取文件大小
+            if isinstance(file, File) and hasattr(file, 'blob'):
+                file_size = len(file.blob)
+                filename = file.filename if hasattr(file, 'filename') else "unknown"
+            elif hasattr(file, 'read'):
+                # 保存当前文件指针位置
+                if hasattr(file, 'tell'):
+                    current_pos = file.tell()
+                else:
+                    current_pos = None
+                
+                # 读取文件内容获取大小
+                content = file.read()
+                file_size = len(content)
+                
+                # 重置文件指针
+                if hasattr(file, 'seek') and current_pos is not None:
+                    file.seek(current_pos)
+                
+                filename = getattr(file, 'name', getattr(file, 'filename', "unknown"))
+            elif isinstance(file, (str, bytes, os.PathLike)) and os.path.exists(file):
+                file_size = os.path.getsize(file)
+                filename = os.path.basename(file)
+                
+            # 尝试获取文件类型
+            file_type = get_file_type(file)
+            
+            # 转换文件大小为MB
+            file_size_mb = file_size / (1024 * 1024) if file_size > 0 else 0
+            
+            # 构建与批量上传一致的错误JSON响应结构
+            files_info = [{
+                "filename": filename,
+                "file_size_bytes": file_size,
+                "file_size_mb": round(file_size_mb, 2),
+                "file_type": file_type,
+                "file_url": "",
+                "status": "failed"
+            }]
+            
+            json_response = {
+                "status": "failed",
+                "success_count": 0,
+                "error_count": 1,
+                "error_message": error_message,
+                "files": files_info
+            }
+            
+            yield self.create_json_message(json_response)
+            
             # 在text中输出失败信息 - 英文消息
             yield self.create_text_message(f"Failed to upload file: {str(e)}")
             # 同时抛出异常以保持原有行为

@@ -2,8 +2,8 @@ identity:
   name: "get_file_by_url"
   author: "sawyer-shi"
   label:
-    en_US: "Get File by COS URL"
-    zh_Hans: "通过COS URL获取文件"
+    en_US: "Get File by Tencent Cloud COS URL"
+    zh_Hans: "通过腾讯云COS URL获取文件"
   tags:
     - utilities
     - productivity
