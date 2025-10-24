@@ -1,4 +1,4 @@
-version: 0.0.1
+version: 0.0.2
 type: plugin
 author: sawyer-shi
 name: tencent_cos
@@ -9,6 +9,9 @@ description:
   en_US: Upload files to Tencent  Cloud COS and return the file URL; Enter the URL of the Tencent  Cloud COS file to return the file itself
   zh_Hans: "用于与腾讯云COS交互，支持文件上传和文件获取"
 icon: icon.png
+tags:
+  - utilities
+  - productivity
 resource:
   memory: 268435456
   permission:
@@ -23,7 +26,7 @@ plugins:
   tools:
     - provider/tencent_cos.yaml
 meta:
-  version: 0.0.1
+  version: 0.0.2
   arch:
     - amd64
     - arm64

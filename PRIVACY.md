@@ -1,7 +1,7 @@
 # Privacy Policy / 隐私政策 
 
 **Effective Date / 生效日期**: September 30, 2025 / 2025年9月30日 
-**Version / 版本**: v0.0.1 
+**Version / 版本**: v0.0.2
 **Plugin Name / 插件名称**: Tencent Cloud COS Plugin / 腾讯云COS插件 
 
 --- 
