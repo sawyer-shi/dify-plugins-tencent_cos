@@ -156,8 +156,8 @@ def get_file_type(file: Any) -> str:
             return extension.lower()[1:]  # 移除点号
     
     # 3. 如果仍然无法获取，尝试从文件内容类型推断
-    if hasattr(file, 'content_type') and file.content_type:
-        return get_file_type_from_content_type(file.content_type)
+    if hasattr(file, 'mime_type') and file.mime_type:
+        return get_file_type_from_content_type(file.mime_type)
     
     return "unknown"
 
@@ -185,7 +185,7 @@ def get_file_extension(file: Any) -> str:
             return extension.lower()  # 确保是小写
     
     # 3. 如果仍然无法获取，尝试从文件内容类型推断
-    if hasattr(file, 'content_type') and file.content_type:
-        return get_extension_from_content_type(file.content_type)
+    if hasattr(file, 'mime_type') and file.mime_type:
+        return get_extension_from_content_type(file.mime_type)
     
     return ".dat"
