@@ -253,7 +253,7 @@ class UploadFileTool(Tool):
                         base_name = file_base_name
                 
                 # 3. 尝试从文件内容类型推断扩展名
-                if hasattr(file, 'content_type') and file.content_type:
+                if hasattr(file, 'mime_type') and file.mime_type:
                     extension = get_file_extension(file)
                 
                 # 4. 额外的检查：确保扩展名是小写的，并且包含点号
@@ -320,7 +320,7 @@ class UploadFileTool(Tool):
                     # 获取文件内容
                     file_content = file.blob
                     # 获取文件内容类型
-                    content_type = getattr(file, 'content_type', 'application/octet-stream')
+                    content_type = getattr(file, 'mime_type', 'application/octet-stream')
                     # 上传文件内容
                     response = client.put_object(
                         Bucket=credentials['bucket'],
@@ -334,7 +334,7 @@ class UploadFileTool(Tool):
                     if hasattr(file, 'seek'):
                         file.seek(0)
                     # 获取文件内容类型
-                    content_type = getattr(file, 'content_type', 'application/octet-stream')
+                    content_type = getattr(file, 'mime_type', 'application/octet-stream')
                     # 上传文件流
                     response = client.put_object(
                         Bucket=credentials['bucket'],
